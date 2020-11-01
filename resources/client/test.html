@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>The Quiz</title>
-    <script src="/client/js/users.js"></script>
-    <link rel="stylesheet" type="text/css" href="/client/css/styles.css">
+    <script src="/client/js/albums.js"></script>
 </head>
 <body>
-<button onclick='getUsersList();'>RUN MY FUNCTION</button>
-<table id="UsersTable"></table>
+<form id="userDetails">
+    <input type="text" id="Username">
+</form>
+<button onclick='listForGenre();'>Run listForGenre</button>
+<div id="DisplayAlbumsGenre">
+
+</div>
+<br>
 </body>
 </html>

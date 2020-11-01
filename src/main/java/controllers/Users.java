@@ -43,14 +43,12 @@ public class Users{
     public String GetUser(@PathParam("Username") String Username) {
         System.out.println("Invoked Users.GetUser() with UserID " + Username);
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT UserName, Password FROM Users WHERE Username = ?");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT Password FROM Users WHERE Username = ?");
             ps.setString(1, Username);
             ResultSet results = ps.executeQuery();
             JSONObject response = new JSONObject();
             if (results.next()== true) {
-                response.put("UserID", Username);
-                response.put("UserName", results.getString(1));
-                response.put("Token", results.getInt(2));
+                response.put("Password", results.getString(1));
             } else {
                 return "{\"Error\": \"No such username found\"}";
             }
