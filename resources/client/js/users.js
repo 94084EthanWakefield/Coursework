@@ -41,7 +41,7 @@ function UsersLogin() {
         } else {
             Cookies.set("SessionToken", response.SessionToken);
             Cookies.set("Username", response.Username);
-            window.open("index.html", "_self");       //open index.html in same tab
+            window.open("homepage.html", "_self");       //open index.html in same tab
         }
     });
 }
