@@ -25,11 +25,11 @@ public class Albums{
             while (results.next()==true) {
                 JSONObject row = new JSONObject();
                 row.put("AlbumID", results.getInt(1));
-                row.put("Artist", results.getString(2));
-                row.put("Length", results.getInt(3));
-                row.put("Cover", results.getString(4));
+                row.put("AlbumName", results.getString(2));
+                row.put("Artist", results.getString(3));
+                row.put("Length_", results.getInt(4));
                 row.put("Genre", results.getString(5));
-                row.put("Name", results.getString(6));
+                row.put("Cover", results.getString(6));
                 response.add(row);
             }
             return response.toString();
@@ -82,11 +82,11 @@ public class Albums{
             while (results.next()== true) {
                 JSONObject row = new JSONObject();
                 row.put("AlbumID", results.getInt(1));
-                row.put("Artist", results.getString(2));
-                row.put("Length", results.getInt(3));
-                row.put("Cover", results.getString(4));
+                row.put("AlbumName", results.getString(2));
+                row.put("Artist", results.getString(3));
+                row.put("Length_", results.getInt(4));
                 row.put("Genre", results.getString(5));
-                row.put("Name", results.getString(6));
+                row.put("Cover", results.getString(6));
                 response.add(row);
             }
             return response.toString();
