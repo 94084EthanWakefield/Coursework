@@ -17,73 +17,84 @@ function DisplayAllAlbums() {
 }
 
 function formatAllAlbums(myJSONArray) {
+
     let rockID = 0;
     let EDMID = 5;
     let jazzID = 10;
     let classicalID = 15;
     let metalID = 20;
+    let ambientID = 25;
+
     for (let item of myJSONArray) {
-        if (item.Genre === "Rock") {
-            if (rockID >= 4) {
+        let dynamicHTML = "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
+        switch (item.Genre) {
+            case "Rock": {
+                if (rockID >= 4) {
+                    break;
+                } else {
+                    document.getElementById("RockAlbums").innerHTML += dynamicHTML;
+                    changeImage(rockID, item);
+                    rockID++;
+                }
                 break;
-            } else {
-                document.getElementById("RockAlbums").innerHTML += "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
-                document.getElementById("cover").setAttribute("id", rockID);
-                document.getElementById(rockID).setAttribute("src", item.Cover);
-                rockID++
             }
-        }
-        if (item.Genre === "EDM") {
-            if (EDMID >= 9) {
+            case "EDM": {
+                if (EDMID >= 9) {
+                    break;
+                } else {
+                    document.getElementById("EDMAlbums").innerHTML += dynamicHTML;
+                    changeImage(EDMID, item);
+                    EDMID++;
+                }
                 break;
-            } else {
-                document.getElementById("EDMAlbums").innerHTML += "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
-                document.getElementById("cover").setAttribute("id", EDMID);
-                document.getElementById(EDMID).setAttribute("src", item.Cover);
-                EDMID++
             }
-        }
-        if (item.Genre === "Jazz") {
-            if (jazzID >= 14) {
-                break;
-            } else {
-                document.getElementById("JazzAlbums").innerHTML += "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
-                document.getElementById("cover").setAttribute("id", jazzID);
-                document.getElementById(jazzID).setAttribute("src", item.Cover);
-                jazzID++
+            case "Jazz": {
+                if (jazzID >= 14) {
+                    break;
+                } else {
+                    document.getElementById("JazzAlbums").innerHTML += dynamicHTML;
+                    changeImage(jazzID, item);
+                    jazzID++;
+                }
+                break
             }
-        }
-        if (item.Genre === "Classical") {
-            if (classicalID >= 19) {
-                break;
-            } else {
-                document.getElementById("ClassicalAlbums").innerHTML += "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
-                document.getElementById("cover").setAttribute("id", classicalID);
-                document.getElementById(classicalID).setAttribute("src", item.Cover);
-                classicalID++
+            case "Classical": {
+                if (classicalID >= 19) {
+                    break;
+                } else {
+                    document.getElementById("ClassicalAlbums").innerHTML += dynamicHTML;
+                    changeImage(classicalID, item);
+                    classicalID++;
+                }
+                break
             }
-        }
-        if (item.Genre === "Metal") {
-            if (metalID >= 24) {
+            case "Metal": {
+                if (metalID >= 24) {
+                    break;
+                } else {
+                    document.getElementById("MetalAlbums").innerHTML += dynamicHTML;
+                    changeImage(metalID, item);
+                    metalID++;
+                }
                 break;
-            } else {
-                document.getElementById("MetalAlbums").innerHTML += "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
-                document.getElementById("cover").setAttribute("id", metalID);
-                document.getElementById(metalID).setAttribute("src", item.Cover);
-                metalID++
             }
-        }
-        if (item.Genre === "Ambient") {
-            if (ambientID >= 29) {
-                break;
-            } else {
-                document.getElementById("AmbientAlbums").innerHTML += "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
-                document.getElementById("cover").setAttribute("id", ambientID);
-                document.getElementById(ambientID).setAttribute("src", item.Cover);
-                ambientID++
+            case "Ambient": {
+                if (ambientID >= 29) {
+                    break;
+                } else {
+                    document.getElementById("AmbientAlbums").innerHTML += dynamicHTML;
+                    changeImage(ambientID, item);
+                    ambientID++;
+                }
             }
         }
     }
+}
+
+
+function changeImage(genreID, item) {
+    document.getElementById("cover").setAttribute("id", genreID);
+    document.getElementById(genreID).setAttribute("src", item.Cover);
 }
 
 

@@ -16,6 +16,7 @@ import java.util.UUID;
 @Produces(MediaType.APPLICATION_JSON)
 
 public class Users{
+/*
     @GET
     @Path("list")
     public String UsersList() {
@@ -59,16 +60,17 @@ public class Users{
             return "{\"Error\": \"Unable to get item, please see server console for more info.\"}";
         }
     }
+*/
 
     @POST
     @Path("new")
-    public String UsersAdd(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password, @FormDataParam("Creationdate") String Creationdate) {
+    public String UsersAdd(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password) {
         System.out.println("Invoked Users.UsersAdd()");
         try {
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (Username, Password, CreationDate) VALUES (?, ?, ?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (Username, Password) VALUES (?, ?)");
             ps.setString(1, Username);
             ps.setString(2, Password);
-            ps.setString(3, Creationdate);
+
             ps.execute();
             return "{\"OK\": \"Added user.\"}";
         } catch (Exception exception) {

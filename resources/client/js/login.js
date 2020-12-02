@@ -25,7 +25,7 @@ function formatUsersList(myJSONArray){
 }
 
 function UsersLogin() {
-    //debugger;
+
     console.log("Invoked UsersLogin() ");
     let url = "/users/login";
     let formData = new FormData(document.getElementById('LoginForm'));
@@ -34,15 +34,20 @@ function UsersLogin() {
         method: "POST",
         body: formData,
     }).then(response => {
-        return response.json();                 //now return that promise to JSON
+        return response.json();
     }).then(response => {
         if (response.hasOwnProperty("Error")) {
-            alert(JSON.stringify(response));        // if it does, convert JSON object to string and alert
+            alert(JSON.stringify(response));
         } else {
             Cookies.set("SessionToken", response.SessionToken);
             Cookies.set("Username", response.Username);
-            window.open("homepage.html", "_self");       //open index.html in same tab
+            window.open("homepage.html", "_self");
         }
     });
 }
+
+//     let date = new Date();
+//     formData.append("day", date.getDate().toString());
+//     formData.append("month", date.getMonth().toString());
+//     formData.append("year", date.getFullYear().toString());
 
