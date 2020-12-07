@@ -40,16 +40,16 @@ public class Albums{
     }
 
     @GET
-    @Path("listforgenre/{Username}")
+    @Path("listforgenre")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String GetUserGenre(@PathParam("Username") String Username) {
-        System.out.println("Invoked Users.GetUserGenre() with User " + Username);
+    public String GetUserGenre(@CookieParam("SessionToken") String Token) {
+        System.out.println("Invoked Albums.ListforGenre() with token " + Token);
         JSONArray response = new JSONArray();
         try {
-        PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Albums WHERE Genre = (SELECT Genre FROM Songs WHERE SongID = (SELECT SongID FROM Listenings WHERE Username = ? AND TimesYear = (SELECT MAX(TimesYear) FROM Listenings WHERE Username = ?)))");
-            ps.setString(1, Username);
-            ps.setString(2, Username);
+        PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Albums WHERE Genre = (SELECT Genre FROM Songs WHERE SongID = (SELECT SongID FROM Listenings WHERE UserName = (SELECT UserName FROM USERS WHERE SessionToken = ?) AND TimesYear = (SELECT MAX(TimesYear) FROM Listenings WHERE UserName = (SELECT UserName FROM USERS WHERE SessionToken = ?))))");
+            ps.setString(1, Token);
+            ps.setString(2, Token);
             ResultSet results = ps.executeQuery();
             while (results.next()== true) {
                 JSONObject row = new JSONObject();
@@ -69,15 +69,15 @@ public class Albums{
     }
 
     @GET
-    @Path("listlatest/{Username}")
+    @Path("listlatest")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String GetUserLatest(@PathParam("Username") String Username) {
-        System.out.println("Invoked Users.GetUserLatest() with User " + Username);
+    public String GetUserLatest(@CookieParam("SessionToken") String Token) {
+        System.out.println("Invoked Albums.GetUserLatest() with token " + Token);
         JSONArray response = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Albums WHERE AlbumID IN (SELECT AlbumID FROM Songs WHERE SongID IN (SELECT SongID FROM Listenings WHERE Username = ? ORDER BY MostRecent DESC))");
-            ps.setString(1, Username);
+            PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Albums WHERE AlbumID IN (SELECT AlbumID FROM Songs WHERE SongID IN (SELECT SongID FROM Listenings WHERE Username = (SELECT UserName FROM USERS WHERE SessionToken = ?) ORDER BY MostRecent DESC))");
+            ps.setString(1, Token);
             ResultSet results = ps.executeQuery();
             while (results.next()== true) {
                 JSONObject row = new JSONObject();

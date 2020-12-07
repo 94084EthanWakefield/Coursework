@@ -64,20 +64,25 @@ public class Users{
 
     @POST
     @Path("new")
-    public String UsersAdd(@FormDataParam("Username") String Username, @FormDataParam("Password") String Password) {
+    public String UsersAdd(@FormDataParam("UserName") String UserName, @FormDataParam("Password") String Password, @FormDataParam("CreationDay") String CreationDay, @FormDataParam("CreationMonth") String CreationMonth, @FormDataParam("CreationYear") String CreationYear) {
         System.out.println("Invoked Users.UsersAdd()");
         try {
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (Username, Password) VALUES (?, ?)");
-            ps.setString(1, Username);
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (UserName, Password, CreationDay, CreationMonth, CreationYear) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, UserName);
             ps.setString(2, Password);
-
+            ps.setInt(3, Integer.parseInt(CreationDay));
+            ps.setInt(4, Integer.parseInt(CreationMonth));
+            ps.setInt(5, Integer.parseInt(CreationYear));
             ps.execute();
             return "{\"OK\": \"Added user.\"}";
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
-            return "{\"Error\": \"Unable to create new item, please see server console for more info.\"}";
+            if (exception.getMessage().equals("[SQLITE_CONSTRAINT]  Abort due to constraint violation (UNIQUE constraint failed: Users.UserName)")) {
+                return "{\"Error\": \"Username taken, please enter a new one.\"}";
+            } else {
+                return "{\"Error\": \"Unable to create new item, please see server console for more info.\"}";
+            }
         }
-
     }
 
     @POST

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="/client/js/homepage.js"></script>
+    <script src="/client/js/inAlbum.js"></script>
     <link rel="stylesheet" href="">
 </head>
 <body>
@@ -28,11 +29,10 @@
     </ul>
 </nav>
 
-<form id="userDetails">
-    <input type="text" id="Username">
-</form>
-<button onclick='listForGenre();'>Run listForGenre</button>
-<button onclick='listLatest();'>Run listLatest</button>
+<button onclick="listLatest()">go</button>
+<button onclick="listForGenre()">go genre</button>
+
+
 
 <div id="DisplayAlbumsGenre">
     <h1>Recommended albums</h1>

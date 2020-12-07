@@ -40,11 +40,13 @@ function UsersLogin() {
             alert(JSON.stringify(response));
         } else {
             Cookies.set("SessionToken", response.SessionToken);
-            Cookies.set("Username", response.Username);
+            Cookies.set("UserName", response.UserName);
             window.open("homepage.html", "_self");
         }
     });
 }
+
+
 
 //     let date = new Date();
 //     formData.append("day", date.getDate().toString());

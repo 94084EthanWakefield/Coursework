@@ -1,9 +1,8 @@
 "use strict";
 function listForGenre() {
     console.log("Invoked listForGenre()");
-    const Username = document.getElementById("Username").value;
-    const url = "/albums/listforgenre/";
-    fetch(url + Username, {
+    const url = "/albums/listforgenre";
+    fetch(url, {
         method: "GET",
     }).then(response => {
         return response.json();
@@ -18,9 +17,8 @@ function listForGenre() {
 
 function listLatest() {
     console.log("Invoked listLatest()");
-    const Username = document.getElementById("Username").value;
-    const url = "/albums/listlatest/";
-    fetch(url + Username, {
+    const url = "/albums/listlatest";
+    fetch(url, {
         method: "GET",
     }).then(response => {
         return response.json();
@@ -33,29 +31,49 @@ function listLatest() {
     });
 }
 
-function formatAlbums(myJSONArray, type){
-    let data = "";
-    let count = 0;
+function formatAlbums(myJSONArray, type) {
+    let i = 0;
+    let j = 5;
     for (let item of myJSONArray) {
-        data += "<div class='card'>" + item.AlbumName + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
-        count++;
-        if (count === 5) {
-            break;
+        let dynamicHTML = "<div class='card' id='div'>" + item.AlbumName + item.Artist + "<input type='image' id='cover' src='https://picsum.photos/100' alt='image' onclick='listSongs()'>" + "</div>";
+        switch (type) {
+            case "latest": {
+                if (i >= 4) {
+                    break;
+                } else {
+                    document.getElementById("DisplayAlbumsRecent").innerHTML += dynamicHTML;
+                    changeImage(i, item);
+                    i++;
+                }
+                break;
+            }
+            case "genre": {
+                if (j >= 9) {
+                    break;
+                } else {
+                    document.getElementById("DisplayAlbumsGenre").innerHTML += dynamicHTML;
+                    changeImage(j, item);
+                    j++;
+                }
+                break;
+            }
         }
     }
-    if (type === "latest") {
-        document.getElementById("DisplayAlbumsRecent").innerHTML += data;
-        for (let i = 0; i < 5; i++) {
-            document.getElementById("cover").setAttribute("id", i);
-            document.getElementById(i).setAttribute("src", myJSONArray[i].Cover)
-        }
-    } else {
-        document.getElementById("DisplayAlbumsGenre").innerHTML += data;
-        for (let i = 0; i < 5; i++) {
-            document.getElementById("cover").setAttribute("id", i);
-            document.getElementById(i).setAttribute("src", myJSONArray[i].Cover)
-        }
-    }
+}
+
+function changeImage(choice, item) {
+    document.getElementById("cover").setAttribute("id", choice);
+    document.getElementById(choice).setAttribute("src", item.Cover);
+    document.getElementById("div").setAttribute("id", choice);
+}
+
+
+
+
+
+function start() {
+    listForGenre();
+
 }
 
 
