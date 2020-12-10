@@ -1,9 +1,9 @@
 "use strict";
 
-function listSongs() {
+function listSongsInAlbum() {
     console.log("Invoked listForGenre()");
     const url = "/songs/listForAlbum/";
-    const albumName = def;
+    const albumName = "def";
     fetch(url + albumName, {
         method: "GET",
     }).then(response => {
@@ -13,6 +13,7 @@ function listSongs() {
             alert(JSON.stringify(response));
         } else {
             formatSongs(response);
+            window.open("inAlbum.html", "_self");
         }
     })
 }
@@ -22,7 +23,7 @@ function formatSongs(myJSONArray) {
     for (let item of myJSONArray) {
         dataHTML += "<tr><td>" + item.Name + "<td><td>" + item.Length_ + "<tr><td>";
     }
-    document.getElementById("UsersTable").innerHTML = dataHTML;
+    document.getElementById("SongsList").innerHTML = dataHTML;
 
 }
 

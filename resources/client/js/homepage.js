@@ -35,7 +35,7 @@ function formatAlbums(myJSONArray, type) {
     let i = 0;
     let j = 5;
     for (let item of myJSONArray) {
-        let dynamicHTML = "<div class='card' id='div'>" + item.AlbumName + item.Artist + "<input type='image' id='cover' src='https://picsum.photos/100' alt='image' onclick='listSongs()'>" + "</div>";
+        let dynamicHTML = "<div class='card' id='div'>" + item.AlbumName + item.Artist + "<input type='image' id='cover' src='https://picsum.photos/100' alt='image' onclick='listSongsInAlbum()'>" + "</div>";
         switch (type) {
             case "latest": {
                 if (i >= 4) {
