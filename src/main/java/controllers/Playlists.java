@@ -1,5 +1,6 @@
 package controllers;
 
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import server.Main;
@@ -23,12 +24,13 @@ public class Playlists {
         System.out.println("Invoked Playlists.listUserPlaylist with token " + Token);
         JSONArray response = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT PlaylistName FROM Playlists WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?)");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT PlaylistName, PlaylistID FROM Playlists WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?)");
             ps.setString(1, Token);
             ResultSet results = ps.executeQuery();
             while (results.next()== true) {
                 JSONObject row = new JSONObject();
                 row.put("PlaylistName", results.getString(1));
+                row.put("PlaylistID", results.getInt(2));
                 response.add(row);
             }
             return response.toString();
@@ -38,4 +40,30 @@ public class Playlists {
         }
     }
 
+    @POST
+    @Path("listInPlaylist")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String UsersAdd(@FormDataParam("WhichPlaylist") int PlaylistID) {
+        System.out.println("Invoked Playlists.listInPlaylist() with playlistID " + PlaylistID);
+        JSONArray response = new JSONArray();
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("SELECT Name, Artist, Data FROM Songs WHERE SongID = (SELECT SongID FROM Associated WHERE PlaylistID = ?)");
+            ps.setInt(1, PlaylistID);
+            ps.execute();
+            ResultSet results = ps.executeQuery();
+            while (results.next() == true) {
+                JSONObject row = new JSONObject();
+                row.put("Name", results.getString(1));
+                row.put("Artist", results.getString(2));
+                row.put("Data", results.getString(3));
+                response.add(row);
+            }
+            return response.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error\": \"Unable to get item, please see server console for more info.\"}";
+        }
+    }
 }
+

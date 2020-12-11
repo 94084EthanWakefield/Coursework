@@ -67,10 +67,6 @@ function changeImage(choice, item) {
     document.getElementById("div").setAttribute("id", choice);
 }
 
-
-
-
-
 function start() {
     listForGenre();
 

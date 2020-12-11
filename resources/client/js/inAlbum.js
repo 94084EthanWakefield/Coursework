@@ -24,6 +24,5 @@ function formatSongs(myJSONArray) {
         dataHTML += "<tr><td>" + item.Name + "<td><td>" + item.Length_ + "<tr><td>";
     }
     document.getElementById("SongsList").innerHTML = dataHTML;
-
 }
 
