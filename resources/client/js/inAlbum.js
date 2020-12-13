@@ -1,10 +1,9 @@
 "use strict";
 
-function listSongsInAlbum() {
-    console.log("Invoked listForGenre()");
+function listSongsInAlbum(which) {
+    console.log("Invoked listSongsInAlbum");
     const url = "/songs/listForAlbum/";
-    const albumName = "def";
-    fetch(url + albumName, {
+    fetch(url + which, {
         method: "GET",
     }).then(response => {
         return response.json();
@@ -13,7 +12,6 @@ function listSongsInAlbum() {
             alert(JSON.stringify(response));
         } else {
             formatSongs(response);
-            window.open("inAlbum.html", "_self");
         }
     })
 }
@@ -21,7 +19,7 @@ function listSongsInAlbum() {
 function formatSongs(myJSONArray) {
     let dataHTML = "";
     for (let item of myJSONArray) {
-        dataHTML += "<tr><td>" + item.Name + "<td><td>" + item.Length_ + "<tr><td>";
+        dataHTML += "<tr><td>" + item.Name + "</td><td>" + item.Length_ + "<tr><td>";
     }
     document.getElementById("SongsList").innerHTML = dataHTML;
 }
