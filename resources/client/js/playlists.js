@@ -27,7 +27,8 @@ function formatPlaylists(myJSONArray) {
 
 function changeOnClick(i, item) {
     document.getElementById('playlist').setAttribute('id', i);
-    document.getElementById(i).onclick = SongsInPlaylist(item.AlbumID);
+    let whichID = item.PlaylistID;
+    document.getElementById(i).setAttribute("onclick", `SongsInPlaylist(${whichID})`);
 
 }
 
@@ -50,9 +51,29 @@ function SongsInPlaylist(which) {
 }
 
 function formatSongs(myJSONArray) {
+    let dataHTML = "";
     for (let item of myJSONArray) {
-        document.getElementById("listSongsInPlaylist").innerHTML += "<div>" + item.Name + " " + item.Artist + " " + item.Data + "</div>";
+        dataHTML += "<div>" + item.Name + " " + item.Artist + " " + item.Data + "</div>";
     }
+    document.getElementById('SongsList').innerHTML = dataHTML;
+}
+
+function addPlaylist() {
+    console.log("Invoked addPlaylist()");
+    const url = "/playlists/new/";
+    let formData = new FormData(document.getElementById("NewPlaylist"));
+    fetch(url, {
+        method: "POST",
+        body: formData,
+    }).then(response => {
+        return response.json()
+    }).then(response => {
+        if (response.hasOwnProperty("Error")) {
+            alert(JSON.stringify(response));
+        } else {
+            alert("Added playlist");
+        }
+    });
 }
 
 

@@ -35,7 +35,7 @@ function formatAlbums(myJSONArray, type) {
     let i = 0;
     let j = 5;
     for (let item of myJSONArray) {
-        let dynamicHTML = "<div class='card'>" + item.AlbumName + item.Artist + "<input type='image' id='cover' src=@item.Cover alt='image' onclick=# >" + "</div>";
+        let dynamicHTML = "<div class='card'>" + item.AlbumName + item.Artist + "<input type='image' id='cover' src=# alt='image' onclick=# >" + "</div>";
         switch (type) {
             case "latest": {
                 if (i >= 4) {
@@ -65,9 +65,7 @@ function changeImage(choice, item) {
     document.getElementById("cover").setAttribute("id", choice);
     document.getElementById(choice).setAttribute("src", item.Cover);
     let whichID = item.AlbumID;
-    //only possible with ES6 via template literals
-    document.getElementById(choice).setAttribute("onclick", `listSongsInAlbum(${whichID})`); //OMY GOSD IT WORKS AAAAAAAAAAAAAA
-
+    document.getElementById(choice).setAttribute("onclick", `listSongsInAlbum(${whichID})`);
 }
 
 function start() {

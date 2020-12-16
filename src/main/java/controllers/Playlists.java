@@ -40,6 +40,20 @@ public class Playlists {
         }
     }
 
-
+    @POST
+    @Path("new")
+    public String UsersAdd(@FormDataParam("PlaylistName") String PlaylistName, @CookieParam("SessionToken") String Token) {
+        System.out.println("Invoked Users.UsersAdd()");
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Playlists (UserName, PlaylistName) values ((SELECT UserName FROM Users WHERE SessionToken = ?), ?)");
+            ps.setString(1, Token);
+            ps.setString(2, PlaylistName);
+            ps.execute();
+            return "{\"OK\": \"Added playlist.\"}";
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error\": \"Unable to create new item, please see server console for more info.\"}";
+        }
+    }
 }
 

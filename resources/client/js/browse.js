@@ -26,7 +26,7 @@ function formatAllAlbums(myJSONArray) {
     let ambientID = 25;
 
     for (let item of myJSONArray) {
-        let dynamicHTML = "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image'>" + "</div>";
+        let dynamicHTML = "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image' onclick=#>" + "</div>";
         switch (item.Genre) {
             case "Rock": {
                 if (rockID >= 4) {
@@ -95,6 +95,8 @@ function formatAllAlbums(myJSONArray) {
 function changeImage(genreID, item) {
     document.getElementById("cover").setAttribute("id", genreID);
     document.getElementById(genreID).setAttribute("src", item.Cover);
+    let whichID = item.AlbumID;
+    document.getElementById(genreID).setAttribute("onclick", `listSongsInAlbum(${whichID})`);
 }
 
 
