@@ -27,7 +27,7 @@ public class Songs {
             PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Songs WHERE AlbumID = ?");
             ps.setString(1, AlbumID);
             ResultSet results = ps.executeQuery();
-            while (results.next()==true) {
+            while (results.next() == true) {
                 JSONObject row = new JSONObject();
                 row.put("Name", results.getString(5));
                 row.put("Artist", results.getString(2));
@@ -71,8 +71,8 @@ public class Songs {
 
     @POST
     @Path("addToPlaylist")
-    public String UsersAdd(@FormDataParam("chooseSong") String SongID, @FormDataParam("choosePlaylist") String PlaylistID) {
-        System.out.println("Invoked Users.UsersAdd()");
+    public String AddToPlaylist(@FormDataParam("chooseSong") String SongID, @FormDataParam("choosePlaylist") String PlaylistID) {
+        System.out.println("Invoked Songs.addToPlaylist()");
         try {
             PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Associated (PlaylistID, SongID) values (?, ?)");
             ps.setInt(1, Integer.parseInt(PlaylistID));
@@ -81,8 +81,54 @@ public class Songs {
             return "{\"OK\": \"Added song.\"}";
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
-            return "{\"Error\": \"Unable to create new item, please see server console for more info.\"}";
+            if (exception.getMessage().equals("[SQLITE_CONSTRAINT]  Abort due to constraint violation (UNIQUE constraint failed: Associated.PlaylistID, Associated.SongID)")) {
+                return "{\"Error\": \"Already in playlist.\"}";
+            } else {
+                return "{\"Error\": \"Unable to post item, please see server console for more info.\"}";
+            }
+        }
+    }
+
+    @POST
+    @Path("removeFromPlaylist")
+    public String RemoveFromPlaylist(@FormDataParam("SongID") String SongID, @FormDataParam("PlaylistID") String PlaylistID) {
+        System.out.println("Invoked Songs.removeToPlaylist()");
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Associated WHERE SongID = ? AND PlaylistID = ?");
+            ps.setInt(1, Integer.parseInt(SongID));
+            ps.setInt(2, Integer.parseInt(PlaylistID));
+            ps.execute();
+            return "{\"OK\": \"Remove song.\"}";
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error\": \"Unable to post item, please see server console for more info.\"}";
+        }
+    }
+
+    //NEW WRITE NEXT
+    @POST
+    @Path("update/{SongID}")
+    public String Update(@PathParam("SongID") int SongID, @CookieParam("SessionToken") String Token) {
+        System.out.println("Invoked Songs.updatet()");
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE Listenings SET TimesWeek = TimesWeek + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
+            PreparedStatement ps2 = Main.db.prepareStatement("UPDATE Listenings SET TimesMonth = TimesMonth + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
+            PreparedStatement ps3 = Main.db.prepareStatement("UPDATE Listenings SET TimesYear = TimesYear + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
+            ps.setString(1, Token);
+            ps.setInt(2, SongID);
+            ps.execute();
+            ps2.setString(1, Token);
+            ps2.setInt(2, SongID);
+            ps2.execute();
+            ps3.setString(1, Token);
+            ps3.setInt(2, SongID);
+            ps3.execute();
+            return "{\"OK\": \"Updated.\"}";
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error\": \"Unable to post item, please see server console for more info.\"}";
         }
     }
 }
+
 

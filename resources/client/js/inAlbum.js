@@ -33,12 +33,12 @@ function formatSongs(SongsJSONArray, PlaylistJSONArray) {
 
     let dataHTML = "";
     for (let item of SongsJSONArray) {
-        dataHTML += "<tr><td>" + item.Name + "<td><td>" + item.Length_ + "<tr><td>";
+        dataHTML += "<tr><td>" + item.Name + "</td><td>" + item.Length_ + "</td><td>" + "<audio id='audios' controls><source id='songData' src=# type='audio/mpeg'></audio></td></tr>";
         document.getElementById('SongsList').innerHTML = dataHTML;
     }
 
     document.getElementById('SongsList').innerHTML += "<div>  <select id='chooseSong' name='chooseSong'></select> <select id='choosePlaylist' name='choosePlaylist'></select>  </div>";
-    let i = 0;
+    let i = 50;
     for (let item of SongsJSONArray) {
         document.getElementById('chooseSong').innerHTML += "<option id='base' value=#>" + item.Name + "</option>";
         document.getElementById('base').setAttribute('id', i);
@@ -54,9 +54,27 @@ function formatSongs(SongsJSONArray, PlaylistJSONArray) {
     }
     document.getElementById('SongsList').innerHTML += "<button type='button' onclick='addToPlaylist()'>Add</button>";
 
+
+    //NEW WRITE NEXT
+    //REMEMBER TO PULL
+    let k = 150;
+    for (let item of SongsJSONArray) {
+        document.getElementById('songData').setAttribute('id', k);
+        document.getElementById(k).setAttribute('src', item.Data);
+        k++;
+    }
+
+    let h = 200;
+    for(let item of SongsJSONArray) {
+        document.getElementById('audios').setAttribute('id', h);
+        document.getElementById(h).onplay = function() {
+            updateTimes(item.SongID);
+        };
+        h++
+    }
+
+
 }
-
-
 
 function addToPlaylist() {
     console.log("Invoked AddToPlaylist() ");
@@ -74,6 +92,20 @@ function addToPlaylist() {
             alert("Added to playlist")
         }
     });
+}
+
+function updateTimes(songID) {
+    console.log('Invoked updateTiems with ID ' + songID);
+    let url = "/songs/update/";
+    fetch(url + songID, {
+        method: "POST"
+    }).then(response => {
+        return response.json();
+    }).then(response => {
+        if (response.hasOwnProperty("Error")) {
+            alert(JSON.stringify(response));
+        }
+    })
 }
 
 
