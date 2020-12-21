@@ -68,10 +68,7 @@ function changeImage(choice, item) {
     document.getElementById(choice).setAttribute("onclick", `listSongsInAlbum(${whichID})`);
 }
 
-function start() {
-    listForGenre();
 
-}
 
 
 
