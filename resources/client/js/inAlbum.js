@@ -105,6 +105,18 @@ function updateTimes(songID) {
         if (response.hasOwnProperty("Error")) {
             alert(JSON.stringify(response));
         }
+    });
+
+    console.log('Invoked addTimes with ID ' + songID);
+    let url2 = "/songs/add/";
+    fetch(url2 + songID, {
+        method: "POST"
+    }).then(response => {
+        return response.json();
+    }).then(response => {
+        if (response.hasOwnProperty("Error")) {
+            alert(JSON.stringify(response));
+        }
     })
 }
 

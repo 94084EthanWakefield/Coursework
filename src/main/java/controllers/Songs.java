@@ -10,6 +10,10 @@ import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.time.ZonedDateTime;
+
 @Path("songs/")
 @Consumes(MediaType.MULTIPART_FORM_DATA)
 @Produces(MediaType.APPLICATION_JSON)
@@ -105,7 +109,28 @@ public class Songs {
         }
     }
 
-    //NEW WRITE NEXT
+
+    @POST
+    @Path("add/{SongID}")
+    public String Add(@PathParam("SongID") int SongID, @CookieParam("SessionToken") String Token) {
+        System.out.println("Invoked Songs.add()");
+        try {
+            Date date = new Date();
+            long time = date.getTime();
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Listenings (SongID, UserName, TimesWeek, TimesMonth, TimesYear, MostRecent) VALUES (?, (SELECT UserName FROM Users WHERE SessionToken = ?), 0, 0, 0, ?)");
+            ps.setInt(1, SongID);
+            ps.setString(2, Token);
+            ps.setLong(3, time);
+            System.out.println(time);
+            ps.execute();
+            return "{\"OK\": \"Updated.\"}";
+
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error\": \"Unable to post item, please see server console for more info.\"}";
+        }
+    }
+
     @POST
     @Path("update/{SongID}")
     public String Update(@PathParam("SongID") int SongID, @CookieParam("SessionToken") String Token) {

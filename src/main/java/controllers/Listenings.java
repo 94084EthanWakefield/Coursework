@@ -16,23 +16,43 @@ import java.sql.ResultSet;
 public class Listenings {
 
     @GET
-    @Path("get")
+    @Path("get/{which}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getTimesListened(@CookieParam("SessionToken") String Token) {
+    public String getTimesListened(@CookieParam("SessionToken") String Token, @PathParam("which") int Which) {
         System.out.println("Invoked Listenings.getTimesListened");
         JSONArray response = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT Songs.Name, Listenings.TimesWeek, Listenings.TimesMonth, Listenings.TimesYear FROM Listenings INNER JOIN Songs ON Listenings.SongID = Songs.SongID WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?)");
-            ps.setString(1, Token);
-            ResultSet results = ps.executeQuery();
-            while (results.next() == true) {
-                JSONObject row = new JSONObject();
-                row.put("SongName", results.getString(1));
-                row.put("TimesWeek", results.getInt(2));
-                row.put("TimesMonth", results.getInt(3));
-                row.put("TimesYear", results.getInt(4));
-                response.add(row);
+            if (Which == 1) {
+                PreparedStatement ps = Main.db.prepareStatement("SELECT Songs.Name, Listenings.TimesWeek FROM Listenings INNER JOIN Songs ON Listenings.SongID = Songs.SongID WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) ORDER BY Listenings.TimesWeek DESC");
+                ps.setString(1, Token);
+                ResultSet results = ps.executeQuery();
+                while (results.next() == true) {
+                    JSONObject row = new JSONObject();
+                    row.put("SongName", results.getString(1));
+                    row.put("TimesWeek", results.getInt(2));
+                    response.add(row);
+                }
+            } else if (Which == 2) {
+                PreparedStatement ps2 = Main.db.prepareStatement("SELECT Songs.Name, Listenings.TimesMonth FROM Listenings INNER JOIN Songs ON Listenings.SongID = Songs.SongID WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) ORDER BY Listenings.TimesMonth DESC");
+                ps2.setString(1, Token);
+                ResultSet results = ps2.executeQuery();
+                while (results.next() == true) {
+                    JSONObject row = new JSONObject();
+                    row.put("SongName", results.getString(1));
+                    row.put("TimesMonth", results.getInt(2));
+                    response.add(row);
+                }
+            } else if (Which == 3) {
+                PreparedStatement ps3 = Main.db.prepareStatement("SELECT Songs.Name, Listenings.TimesYear FROM Listenings INNER JOIN Songs ON Listenings.SongID = Songs.SongID WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) ORDER BY Listenings.TimesYear DESC");
+                ps3.setString(1, Token);
+                ResultSet results = ps3.executeQuery();
+                while (results.next() == true) {
+                    JSONObject row = new JSONObject();
+                    row.put("SongName", results.getString(1));
+                    row.put("TimesYear", results.getInt(2));
+                    response.add(row);
+                }
             }
             return response.toString();
         } catch (Exception exception) {
