@@ -5,9 +5,12 @@
     <title></title>
     <script src="/client/js/homepage.js"></script>
     <script src="/client/js/inAlbum.js"></script>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/client/css/homepage.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="start()">
 <!--<style>
     .card {
         float: left;
@@ -19,7 +22,9 @@
 
 
 </style> -->
-
+<h1>
+    <p>μzik</p>
+</h1>
 <nav>
     <ul>
         <li class="active"><a href=#>Home</a></li>
@@ -29,18 +34,19 @@
     </ul>
 </nav>
 
-<button onclick="listLatest()">go</button>
-<button onclick="listForGenre()">go genre</button>
+<div class="container">
 
-
-
-<div id="DisplayAlbumsGenre">
+<div class="subheading1">
     <h1>Recommended albums</h1>
+</div>
+<div id="DisplayAlbumsGenre">
 
 </div>
 
-<div id="DisplayAlbumsRecent">
+<div class="subheading2">
     <h1>Latest Albums</h1>
+</div>
+<div id="DisplayAlbumsRecent">
 
 </div>
 
@@ -49,5 +55,6 @@
 </form>
 
 <br>
+</div>
 </body>
 </html>

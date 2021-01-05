@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: lighter;
+    background-color: #121214;
+}
+
+.container {
+    margin-left: 140px;
+    margin-top: 70px;
+
+}
+
+.subheading1, .subheading2, #DisplayAlbumsGenre, #DisplayAlbumsRecent {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.subheading1 {
+    padding-right: 1080px;
+}
+
+.subheading2 {
+    padding-right: 1324px;
+    padding-top: 60px;
+}
+
+
+
+.card {
+    float: left;
+    margin: 0px 60px;
+    border-radius: 7%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: transform .1s;
+    background-color: #141416;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.image {
+    border-radius: 7% 7% 0% 0%;
+}
+
+h1{
+    color: #6BEBB9;
+    font-size: 60px;
+}
+
+h1 p {
+    display: flex;
+    justify-content: center;
+    padding: 30px 1483px 30px 0px;
+}
+
+nav ul li{
+    background-color: #141416;
+}
+
+nav ul {
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #141416;
+    text-align: center;
+    font-weight: lighter;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+nav ul li {
+    float: left;
+    padding: 20px 150px;
+
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #6BEBB6;
+    margin: 20px;
+    text-align: center;
+    font-size: 18px
+}
+
+nav ul li:hover {
+    border-bottom-color: #6BEBB9;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+    transition: border-width 200ms;
+}
+
+.active {
+    border-bottom-color: #6BEBB6;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.current {
+    display: flex;
+    justify-content: center;
+    margin-right: 1113px;
+    margin-top: 110px;
+    margin-bottom: 30px;
+}

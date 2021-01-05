@@ -23,6 +23,7 @@ function getData(which) {
 }
 
 function draw(response, which) {
+
     if (which === 1) {
         let SongArray = [];
         let weekData = [];
