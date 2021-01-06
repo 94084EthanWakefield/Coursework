@@ -55,5 +55,21 @@ public class Playlists {
             return "{\"Error\": \"Unable to create new item, please see server console for more info.\"}";
         }
     }
+
+    @POST
+    @Path("delete")
+    public String Delete(@FormDataParam("chooseSong") String SongName, @FormDataParam("choosePlaylist") String PlaylistName) {
+        System.out.println("Invoked deleteplaylist" + SongName + PlaylistName);
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Associated WHERE SongID = ? AND PlaylistID = ?");
+            ps.setString(1, SongName);
+            ps.setString(2, PlaylistName);
+            ps.execute();
+            return "{\"OK\": \"Removed playlist.\"}";
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"Error\": \"Unable to create new item, please see server console for more info.\"}";
+        }
+    }
 }
 
