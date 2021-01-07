@@ -5,7 +5,7 @@
     <title></title>
     <script src="/client/js/homepage.js"></script>
     <script src="/client/js/inAlbum.js"></script>
-    <link rel="stylesheet" href="/client/css/homepage.css">
+    <link id="pageStyle" rel="stylesheet" href="/client/css/homepage.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
@@ -28,14 +28,14 @@
 <nav>
     <ul>
         <li class="active"><a href=#>Home</a></li>
-        <li><a href=#>Browse</a></li>
-        <li><a href=#>Stats</a></li>
-        <li><a href=#>Playlists</a></li>
+        <li><a href="http://localhost:8081/client/browse.html">Browse</a></li>
+        <li><a href="http://localhost:8081/client/stats.html">Stats</a></li>
+        <li><a href="http://localhost:8081/client/playlists.html">Playlists</a></li>
     </ul>
 </nav>
 
 <div class="container">
-
+<div class="subContainer">
 <div class="subheading1">
     <h1>Recommended albums</h1>
 </div>
@@ -49,12 +49,18 @@
 <div id="DisplayAlbumsRecent">
 
 </div>
-
+</div>
+<div class="showSongs">
 <form id="SongsList">
 
 </form>
-
+</div>
 <br>
 </div>
+
+<div id="workButton"><Button onclick="swapsheet('/client/css/workmode.css')">Enter Work Mode</Button></div>
+
+<div id="normalButton"><Button onclick="swapsheet('/client/css/homepage.css')">Leave</Button></div>
+
 </body>
 </html>

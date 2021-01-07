@@ -15,6 +15,11 @@ function listForGenre() {
     });
 }
 
+window.addEventListener("scroll", function(){
+    let nav = document.querySelector("nav");
+    nav.classList.toggle("sticky", window.scrollY > 127);
+});
+
 function listLatest() {
     console.log("Invoked listLatest()");
     const url = "/albums/listlatest";
@@ -35,10 +40,10 @@ function formatAlbums(myJSONArray, type) {
     let i = 0;
     let j = 5;
     for (let item of myJSONArray) {
-        let dynamicHTML = "<div class='card'>" + item.AlbumName + item.Artist + "<input class='image' type='image' id='cover' src=# alt='image' onclick=# >" + "</div>";
+        let dynamicHTML = "<div class='card'>" + "<input class='image' type='image' height='250px' width='250px' id='cover' src=# alt='image' onclick=# >" + "<div class='details'>" + "<p>" + item.AlbumName + "</p>" + "<p>" + item.Artist + "</p>" + "</div>" + "</div>";
         switch (type) {
             case "latest": {
-                if (i >= 4) {
+                if (i > 4) {
                     break;
                 } else {
                     document.getElementById("DisplayAlbumsRecent").innerHTML += dynamicHTML;
@@ -71,6 +76,10 @@ function changeImage(choice, item) {
 function start() {
     listLatest();
     listForGenre();
+}
+
+function swapsheet(sheet) {
+    document.getElementById('pageStyle').setAttribute('href', sheet)
 }
 
 

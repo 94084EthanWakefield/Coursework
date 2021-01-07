@@ -14,22 +14,41 @@ body {
 .container {
     margin-left: 140px;
     margin-top: 70px;
-
 }
 
-.subheading1, .subheading2, #DisplayAlbumsGenre, #DisplayAlbumsRecent {
+#RockAlbums {
+    padding-right: 1450px;
+}
+
+#EDMAlbums {
+    padding-right: 1444px;
+    padding-top: 60px;
+}
+
+#JazzAlbums {
+    padding-right: 1445px;
+    padding-top: 60px;
+}
+
+#ClassicalAlbums {
+    padding-right: 1344px;
+    padding-top: 60px;
+}
+
+#MetalAlbums {
+    padding-right: 1424px;
+    padding-top: 60px;
+}
+
+#AmbientAlbums {
+    padding-right: 1364px;
+    padding-top: 60px;
+}
+
+#innerRockAlbums, #innerEDMAlbums, #innerJazzAlbums, #innerClassicalAlbums, #innerMetalAlbums, #innerAmbientAlbums, #RockAlbums, #EDMAlbums, #JazzAlbums, #ClassicalAlbums, #MetalAlbums, #AmbientAlbums {
     display: flex;
     justify-content: center;
     margin-top: 50px;
-}
-
-.subheading1 {
-    padding-right: 1180px;
-}
-
-.subheading2 {
-    padding-right: 1388px;
-    padding-top: 60px;
 }
 
 .card {
@@ -130,12 +149,6 @@ nav ul li:hover {
     background-color: #141416;
 }
 
-#DisplayAlbumsRecent {
-    margin-bottom: 120px;
-}
-
-
-
 form #songCard{
     display: flex;
     justify-content: center;
@@ -204,13 +217,3 @@ option {
     background-color: #141416;
     margin-right: 80px;
 }
-
-#workButton {
-    margin-left: 10px;
-}
-
-#normalButton {
-    display: none;
-}
-
-

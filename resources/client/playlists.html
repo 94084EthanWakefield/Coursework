@@ -4,23 +4,37 @@
     <meta charset="UTF-8">
     <title>Playlists</title>
     <script src="/client/js/playlists.js"></script>
+    <link rel="stylesheet" href="/client/css/playlists.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
 </head>
 <body onload="listPlaylists()">
+
+<h1>
+    <p>μzik</p>
+</h1>
+<nav>
+    <ul>
+        <li><a href="http://localhost:8081/client/homepage.html">Home</a></li>
+        <li><a href="http://localhost:8081/client/browse.html">Browse</a></li>
+        <li><a href="http://localhost:8081/client/stats.html">Stats</a></li>
+        <li class="active"><a href=#>Home</a></li>
+    </ul>
+</nav>
+
+<h3>My Playlists</h3>
+
 <div id="PlaylistDisplay">
 
 </div>
 
+<div id="bigDiv">
+
+<div class="showSongs">
 <div id="SongsList">
 
 </div>
-
-
-<div>
-    <h3>New Playlist</h3>
-    <form id="NewPlaylist">
-        <input type="text" name = "PlaylistName">
-    </form>
-    <button onclick="addPlaylist()">Create</button>
 </div>
 
 <form id="PlaylistsList">
@@ -30,6 +44,17 @@
 <form id="delete"></form>
 <div id="buttonDelete"></div>
 
+</div>
+
+<h3>New Playlist</h3>
+
+<form id="NewPlaylist">
+    <input type="text" id="name" name = "PlaylistName">
+</form>
+
+<div class="buttonCover">
+    <button onclick="addPlaylist()">Create</button>
+</div>
 
 </body>
 </html>

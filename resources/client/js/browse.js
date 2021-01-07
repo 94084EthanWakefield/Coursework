@@ -16,6 +16,11 @@ function DisplayAllAlbums() {
     });
 }
 
+window.addEventListener("scroll", function(){
+    let nav = document.querySelector("nav");
+    nav.classList.toggle("sticky", window.scrollY > 127);
+});
+
 function formatAllAlbums(myJSONArray) {
 
     let rockID = 0;
@@ -26,13 +31,13 @@ function formatAllAlbums(myJSONArray) {
     let ambientID = 25;
 
     for (let item of myJSONArray) {
-        let dynamicHTML = "<div class='card'>" + item.AlbumName + item.Genre + item.Artist + "<img id='cover' src='https://picsum.photos/100' alt='image' onclick=#>" + "</div>";
+        let dynamicHTML = "<div class='card'>" + "<input class='image' type='image' height='250px' width='250px' id='cover' src=# alt='image' onclick=# >" + "<div class='details'>" + "<p>" + item.AlbumName + "</p>" + "<p>" + item.Artist + "</p>" + "</div>" + "</div>";
         switch (item.Genre) {
             case "Rock": {
                 if (rockID >= 4) {
                     break;
                 } else {
-                    document.getElementById("RockAlbums").innerHTML += dynamicHTML;
+                    document.getElementById("innerRockAlbums").innerHTML += dynamicHTML;
                     changeImage(rockID, item);
                     rockID++;
                 }
@@ -42,7 +47,7 @@ function formatAllAlbums(myJSONArray) {
                 if (EDMID >= 9) {
                     break;
                 } else {
-                    document.getElementById("EDMAlbums").innerHTML += dynamicHTML;
+                    document.getElementById("innerEDMAlbums").innerHTML += dynamicHTML;
                     changeImage(EDMID, item);
                     EDMID++;
                 }
@@ -52,7 +57,7 @@ function formatAllAlbums(myJSONArray) {
                 if (jazzID >= 14) {
                     break;
                 } else {
-                    document.getElementById("JazzAlbums").innerHTML += dynamicHTML;
+                    document.getElementById("innerJazzAlbums").innerHTML += dynamicHTML;
                     changeImage(jazzID, item);
                     jazzID++;
                 }
@@ -62,7 +67,7 @@ function formatAllAlbums(myJSONArray) {
                 if (classicalID >= 19) {
                     break;
                 } else {
-                    document.getElementById("ClassicalAlbums").innerHTML += dynamicHTML;
+                    document.getElementById("innerClassicalAlbums").innerHTML += dynamicHTML;
                     changeImage(classicalID, item);
                     classicalID++;
                 }
@@ -72,7 +77,7 @@ function formatAllAlbums(myJSONArray) {
                 if (metalID >= 24) {
                     break;
                 } else {
-                    document.getElementById("MetalAlbums").innerHTML += dynamicHTML;
+                    document.getElementById("innerMetalAlbums").innerHTML += dynamicHTML;
                     changeImage(metalID, item);
                     metalID++;
                 }
@@ -82,7 +87,7 @@ function formatAllAlbums(myJSONArray) {
                 if (ambientID >= 29) {
                     break;
                 } else {
-                    document.getElementById("AmbientAlbums").innerHTML += dynamicHTML;
+                    document.getElementById("innerAmbientAlbums").innerHTML += dynamicHTML;
                     changeImage(ambientID, item);
                     ambientID++;
                 }

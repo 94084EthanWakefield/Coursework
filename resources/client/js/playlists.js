@@ -19,7 +19,7 @@ function listPlaylists() {
 function formatPlaylists(myJSONArray) {
     let i = 0;
     for (let item of myJSONArray) {
-        document.getElementById("PlaylistDisplay").innerHTML += "<button type ='button' onclick=# id='playlist'>" + item.PlaylistName + "</button>";
+        document.getElementById("PlaylistDisplay").innerHTML += "<button class='playlistButton' type ='button' onclick=# id='playlist'>" + item.PlaylistName + "</button>";
         changeOnClick(i, item);
         i++
     }
@@ -52,7 +52,7 @@ function SongsInPlaylist(which) {
 function formatSongs(myJSONArray) {
     let dataHTML = "";
     for (let item of myJSONArray) {
-        dataHTML += "<div>" + item.Name + " " + item.Artist + " " + "<audio id='audios' controls><source id='songData' src=# type='audio/mpeg'></audio>" + "</div>";
+        dataHTML += "<div id='eachSong'>" + item.Name + " - " + item.Artist + " " + "<audio id='audios' controls><source id='songData' src=# type='audio/mpeg'></audio>" + "</div>";
     }
     document.getElementById('SongsList').innerHTML = dataHTML;
     let k = 150;
@@ -61,7 +61,7 @@ function formatSongs(myJSONArray) {
         document.getElementById(k).setAttribute('src', item.Data);
         k++;
     }
-    document.getElementById('delete').innerHTML = "<div>  <select id='chooseSong' name='chooseSong'></select> <select id='choosePlaylist' name='choosePlaylist'></select>  </div>";
+    document.getElementById('delete').innerHTML = "<div class='selects'>  <select id='chooseSong' name='chooseSong'></select> <select id='choosePlaylist' name='choosePlaylist'></select>  </div>";
     let i = 50;
     for (let item of myJSONArray) {
         document.getElementById('chooseSong').innerHTML += "<option id='base' value=#>" + item.Name + "</option>";
@@ -88,7 +88,7 @@ function formatSongs(myJSONArray) {
         }
 
     });
-    document.getElementById('buttonDelete').innerHTML = "<button type='button' onclick='deleteFromPlaylist()'>Remove</button>";
+    document.getElementById('buttonDelete').innerHTML = "<div class='addButton'><button type='button' onclick='deleteFromPlaylist()'>Remove</button></div>";
 }
 
 function deleteFromPlaylist() {
@@ -108,6 +108,11 @@ function deleteFromPlaylist() {
         }
     });
 }
+
+window.addEventListener("scroll", function(){
+    let nav = document.querySelector("nav");
+    nav.classList.toggle("sticky", window.scrollY > 127);
+});
 
 function addPlaylist() {
     console.log("Invoked addPlaylist()");

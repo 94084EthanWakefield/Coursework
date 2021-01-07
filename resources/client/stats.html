@@ -5,18 +5,38 @@
     <title>Stats</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="/client/js/stats.js"></script>
+    <link rel="stylesheet" href="/client/css/stats.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body onload="start()">
+
+<h1>
+    <p>μzik</p>
+</h1>
+<nav>
+    <ul>
+        <li><a href="http://localhost:8081/client/homepage.html">Home</a></li>
+        <li><a href="http://localhost:8081/client/browse.html">Browse</a></li>
+        <li class="active"><a href=#>Stats</a></li>
+        <li><a href="http://localhost:8081/client/playlists.html">Playlists</a></li>
+    </ul>
+</nav>
+
 <h2>Weekly songs</h2>
+<div class="canvasCover">
 <canvas id="chartweek" width="500" height="500"></canvas>
-
+</div>
 <h2>Monthly songs</h2>
+<div class="canvasCover">
 <canvas id="chartmonth" width="500" height="500"></canvas>
-
+</div>
 <h2>Yearly songs</h2>
+<div class="canvasCover">
 <canvas id="chartyear" width="500" height="500"></canvas>
-
+</div>
 
 
 </body>

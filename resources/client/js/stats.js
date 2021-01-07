@@ -6,6 +6,11 @@ function start() {
     getData(3);
 }
 
+window.addEventListener("scroll", function(){
+    let nav = document.querySelector("nav");
+    nav.classList.toggle("sticky", window.scrollY > 127);
+});
+
 function getData(which) {
     console.log("Invoked getData() with" + which);
     const url = "/listenings/get/";
@@ -45,6 +50,20 @@ function draw(response, which) {
                 datasets: [{
                     label: 'Listens per week',
                     data: weekData,
+                    backgroundColor: [
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                    ],
+                    borderColor: [
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                    ],
                     borderWidth: 1
                 }]
             },
@@ -73,8 +92,22 @@ function draw(response, which) {
             data: {
                 labels: SongArray,
                 datasets: [{
-                    label: 'Listens per week',
+                    label: 'Listens per month',
                     data: monthData,
+                    backgroundColor: [
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                    ],
+                    borderColor: [
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                    ],
                     borderWidth: 1
                 }]
             },
@@ -103,8 +136,22 @@ function draw(response, which) {
             data: {
                 labels: SongArray,
                 datasets: [{
-                    label: 'Listens per week',
+                    label: 'Listens per year',
                     data: yearData,
+                    backgroundColor: [
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                        'rgb(78,166,130)',
+                    ],
+                    borderColor: [
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                        'rgb(107,235,182)',
+                    ],
                     borderWidth: 1
                 }]
             },

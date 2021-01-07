@@ -5,6 +5,10 @@
     <title>Browse</title>
     <script src="/client/js/browse.js"></script>
     <script src="/client/js/inAlbum.js"></script>
+    <link rel="stylesheet" href="/client/css/browse.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
 </head>
 <body onload="DisplayAllAlbums()">
 <style>
@@ -19,44 +23,61 @@
 
 </style>
 
+<h1>
+    <p>μzik</p>
+</h1>
+<nav>
+    <ul>
+        <li><a href="http://localhost:8081/client/homepage.html">Home</a></li>
+        <li class="active"><a href=#>Browse</a></li>
+        <li><a href="http://localhost:8081/client/stats.html">Stats</a></li>
+        <li><a href="http://localhost:8081/client/playlists.html">Playlists</a></li>
+    </ul>
+</nav>
 
 
 
 <div id = "RockAlbums">
     <h1>Rock</h1>
-
 </div>
+<div id="innerRockAlbums"></div>
 <br>
+
 <div id = "EDMAlbums">
     <h1>EDM</h1>
-
 </div>
+<div id="innerEDMAlbums"></div>
 <br>
+
 <div id = "JazzAlbums">
     <h1>Jazz</h1>
-
 </div>
+<div id="innerJazzAlbums"></div>
 <br>
+
 <div id = "ClassicalAlbums">
     <h1>Classical</h1>
-
 </div>
+<div id="innerClassicalAlbums"></div>
 <br>
+
 <div id = "MetalAlbums">
     <h1>Metal</h1>
-
 </div>
+<div id="innerMetalAlbums"></div>
 <br>
+
 <div id = "AmbientAlbums">
     <h1>Ambient</h1>
-
 </div>
+<div id="innerAmbientAlbums"></div>
+<br>
 
+<div class="showSongs">
 <form id="SongsList">
 
-
 </form>
-
+</div>
 
 
 

@@ -76,7 +76,7 @@ public class Albums{
         System.out.println("Invoked Albums.GetUserLatest() with token " + Token);
         JSONArray response = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Albums WHERE AlbumID IN (SELECT AlbumID FROM Songs WHERE SongID IN (SELECT SongID FROM Listenings WHERE Username = (SELECT UserName FROM USERS WHERE SessionToken = ?) ORDER BY MostRecent DESC))");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT * FROM Albums WHERE AlbumID IN (SELECT AlbumID FROM Songs WHERE SongID IN (SELECT SongID FROM Listenings WHERE Username = (SELECT UserName FROM USERS WHERE SessionToken = ?) ORDER BY MostRecent))");
             ps.setString(1, Token);
             ResultSet results = ps.executeQuery();
             while (results.next()== true) {

@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: lighter;
+    background-color: #121214;
+}
+
+h1 {
+    display:none
+}
+
+nav {
+    display: none;
+}
+
+card {
+    display: none;
+}
+
+.subContainer {
+    display: none;
+}
+
+#workButton {
+    display: none;
+}
+
+.selects {
+    display: none;
+}
+
+.addButton {
+    display: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 400px;
+}
+
+#normalButton {
+    margin-left: 10px;
+}
+
+button {
+    padding: 0.4em 1.2em;
+    margin-top: 5px;
+    border-style: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    color: #121212;
+    background-color: #6BEBB6;
+    text-align: center;
+    transition: all 0.2s;
+}
+

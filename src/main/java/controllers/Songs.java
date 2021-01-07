@@ -127,8 +127,29 @@ public class Songs {
 
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
-            return "{\"Error\": \"Unable to post item, please see server console for more info.\"}";
+            if (exception.getMessage().equals("[SQLITE_CONSTRAINT]  Abort due to constraint violation (UNIQUE constraint failed: Listenings.SongID, Listenings.UserName)")) {
+                try {
+                    Calendar c = Calendar.getInstance();
+                    PreparedStatement ps1 = Main.db.prepareStatement("UPDATE Listenings SET TimesWeek = TimesWeek + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
+                    PreparedStatement ps2 = Main.db.prepareStatement("UPDATE Listenings SET TimesMonth = TimesMonth + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
+                    PreparedStatement ps3 = Main.db.prepareStatement("UPDATE Listenings SET TimesYear = TimesYear + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
+                    ps1.setString(1, Token);
+                    ps1.setInt(2, SongID);
+                    ps1.execute();
+                    ps2.setString(1, Token);
+                    ps2.setInt(2, SongID);
+                    ps2.execute();
+                    ps3.setString(1, Token);
+                    ps3.setInt(2, SongID);
+                    ps3.execute();
+                    return "{\"OK\": \"Updated.\"}";
+                } catch (Exception exception2) {
+                    System.out.println("Database error: " + exception2.getMessage());
+                    return "{\"Error\": \"Unable to post item, please see server console for more info.\"}";
+                }
+            }
         }
+        return "{\"OK\"}";
     }
 
     @POST
@@ -136,6 +157,7 @@ public class Songs {
     public String Update(@PathParam("SongID") int SongID, @CookieParam("SessionToken") String Token) {
         System.out.println("Invoked Songs.updatet()");
         try {
+            Calendar c = Calendar.getInstance();
             PreparedStatement ps = Main.db.prepareStatement("UPDATE Listenings SET TimesWeek = TimesWeek + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
             PreparedStatement ps2 = Main.db.prepareStatement("UPDATE Listenings SET TimesMonth = TimesMonth + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");
             PreparedStatement ps3 = Main.db.prepareStatement("UPDATE Listenings SET TimesYear = TimesYear + 1  WHERE UserName = (SELECT UserName FROM Users WHERE SessionToken = ?) AND SongID = ?");

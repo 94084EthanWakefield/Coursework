@@ -33,11 +33,11 @@ function formatSongs(SongsJSONArray, PlaylistJSONArray) {
 
     let dataHTML = "";
     for (let item of SongsJSONArray) {
-        dataHTML += "<tr><td>" + item.Name + "</td><td>" + item.Length_ + "</td><td>" + "<audio id='audios' controls><source id='songData' src=# type='audio/mpeg'></audio></td></tr>";
+        dataHTML += "<div id='songCard'>" + "<p>" + item.Name + "</p>" + "</td><td>" + "<audio id='audios' controls><source id='songData' src=# type='audio/mpeg'></audio></div>";
         document.getElementById('SongsList').innerHTML = dataHTML;
     }
 
-    document.getElementById('SongsList').innerHTML += "<div>  <select id='chooseSong' name='chooseSong'></select> <select id='choosePlaylist' name='choosePlaylist'></select>  </div>";
+    document.getElementById('SongsList').innerHTML += "<div class='selects'>  <select id='chooseSong' name='chooseSong'></select> <select id='choosePlaylist' name='choosePlaylist'></select>  </div>";
     let i = 50;
     for (let item of SongsJSONArray) {
         document.getElementById('chooseSong').innerHTML += "<option id='base' value=#>" + item.Name + "</option>";
@@ -52,7 +52,7 @@ function formatSongs(SongsJSONArray, PlaylistJSONArray) {
         document.getElementById(j).value = items.PlaylistID;
         j++;
     }
-    document.getElementById('SongsList').innerHTML += "<button type='button' onclick='addToPlaylist()'>Add</button>";
+    document.getElementById('SongsList').innerHTML += "<div class='addButton'><button type='button' onclick='addToPlaylist()'>Add</button></div>";
 
 
     //NEW WRITE NEXT
@@ -96,7 +96,7 @@ function addToPlaylist() {
 
 function updateTimes(songID) {
     console.log('Invoked updateTiems with ID ' + songID);
-    let url = "/songs/update/";
+    let url = "/songs/add/";
     fetch(url + songID, {
         method: "POST"
     }).then(response => {
@@ -107,17 +107,7 @@ function updateTimes(songID) {
         }
     });
 
-    console.log('Invoked addTimes with ID ' + songID);
-    let url2 = "/songs/add/";
-    fetch(url2 + songID, {
-        method: "POST"
-    }).then(response => {
-        return response.json();
-    }).then(response => {
-        if (response.hasOwnProperty("Error")) {
-            alert(JSON.stringify(response));
-        }
-    })
+
 }
 
 
