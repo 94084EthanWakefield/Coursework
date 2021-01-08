@@ -213,4 +213,30 @@ option {
     display: none;
 }
 
+@media (max-width: 1600px) {
+    nav ul {
+        display: inline-block;
+    }
+
+    .logo {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .subheading1 {
+        margin-left: 100px;
+    }
+
+    #DisplayAlbumsGenre, #DisplayAlbumsRecent {
+        display: inline-block;
+        margin-top: 50px;
+    }
+
+}
+
 

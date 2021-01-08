@@ -217,3 +217,38 @@ option {
     background-color: #141416;
     margin-right: 80px;
 }
+
+@media (max-width: 1600px) {
+    nav ul {
+        display: inline-block;
+    }
+
+    .logo {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+}
+
+@media (max-width: 1600px) {
+    nav ul {
+        display: inline-block;
+    }
+
+    h1 {
+        display: flex;
+        justify-content: center;
+        margin-left: 200px;
+    }
+
+    .logo {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    #innerRockAlbums, #innerEDMAlbums, #innerJazzAlbums, #innerClassicalAlbums, #innerMetalAlbums, #innerAmbientAlbums {
+        display: inline-block;
+        margin-top: 50px;
+    }
+
+}

@@ -115,3 +115,15 @@ nav ul li:hover {
     margin-bottom: 30px;
 }
 
+@media (max-width: 1600px) {
+    nav ul {
+        display: inline-block;
+    }
+
+    .logo {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+}
+

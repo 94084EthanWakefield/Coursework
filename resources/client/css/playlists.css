@@ -216,4 +216,36 @@ audio {
     margin-right: 1450px;
 }
 
+@media (max-width: 1600px) {
+    nav ul {
+        display: inline-block;
+    }
+
+    .logo {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .container {
+        margin-left: 200px;
+    }
+
+    #PlaylistDisplay {
+        display: inline-block;
+    }
+
+    #name {
+        margin-left: 190px;
+    }
+
+    .buttonCover {
+        margin-left: 45px;
+    }
+
+    #delete {
+        padding: 0;
+    }
+
+}
+
 
