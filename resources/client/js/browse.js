@@ -34,7 +34,7 @@ function formatAllAlbums(myJSONArray) {
         let dynamicHTML = "<div class='card'>" + "<input class='image' type='image' height='250px' width='250px' id='cover' src=# alt='image' onclick=# >" + "<div class='details'>" + "<p>" + item.AlbumName + "</p>" + "<p>" + item.Artist + "</p>" + "</div>" + "</div>";
         switch (item.Genre) {
             case "Rock": {
-                if (rockID >= 4) {
+                if (rockID > 4) {
                     break;
                 } else {
                     document.getElementById("innerRockAlbums").innerHTML += dynamicHTML;
@@ -44,7 +44,7 @@ function formatAllAlbums(myJSONArray) {
                 break;
             }
             case "EDM": {
-                if (EDMID >= 9) {
+                if (EDMID > 9) {
                     break;
                 } else {
                     document.getElementById("innerEDMAlbums").innerHTML += dynamicHTML;
@@ -54,7 +54,7 @@ function formatAllAlbums(myJSONArray) {
                 break;
             }
             case "Jazz": {
-                if (jazzID >= 14) {
+                if (jazzID > 14) {
                     break;
                 } else {
                     document.getElementById("innerJazzAlbums").innerHTML += dynamicHTML;
@@ -64,7 +64,7 @@ function formatAllAlbums(myJSONArray) {
                 break
             }
             case "Classical": {
-                if (classicalID >= 19) {
+                if (classicalID > 19) {
                     break;
                 } else {
                     document.getElementById("innerClassicalAlbums").innerHTML += dynamicHTML;
@@ -74,7 +74,7 @@ function formatAllAlbums(myJSONArray) {
                 break
             }
             case "Metal": {
-                if (metalID >= 24) {
+                if (metalID > 24) {
                     break;
                 } else {
                     document.getElementById("innerMetalAlbums").innerHTML += dynamicHTML;
@@ -84,7 +84,7 @@ function formatAllAlbums(myJSONArray) {
                 break;
             }
             case "Ambient": {
-                if (ambientID >= 29) {
+                if (ambientID > 29) {
                     break;
                 } else {
                     document.getElementById("innerAmbientAlbums").innerHTML += dynamicHTML;

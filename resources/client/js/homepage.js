@@ -53,7 +53,7 @@ function formatAlbums(myJSONArray, type) {
                 break;
             }
             case "genre": {
-                if (j >= 9) {
+                if (j > 9) {
                     break;
                 } else {
                     document.getElementById("DisplayAlbumsGenre").innerHTML += dynamicHTML;
